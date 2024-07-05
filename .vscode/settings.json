@@ -1,0 +1,7 @@
+{
+	"editor.tabSize": 2,
+	"editor.formatOnSave": false,
+	"html.format.enable": false,
+	"liveServer.settings.port": 38000,
+	"liveServer.settings.file": "/docsconverter-v2-build-pipeline_2.html"
+}

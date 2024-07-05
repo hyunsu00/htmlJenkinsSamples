@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Pipeline Docsconverter V2 Build Pipeline</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        h1 {
+            text-align: left;
+        }
+
+        .hdv-main-panel {
+            width: 100%;
+	        margin: 0 auto;
+        }
+
+        .hdv-sub-panel {
+            width: 80%; /* 부모 요소보다 20% 작게 설정 */
+            height: 80%; /* 부모 요소보다 20% 작게 설정 */
+            border: 2px solid #c3ccd1; /* 프레임을 그립니다 */
+            border-radius: 6px;
+            box-shadow: 0 0 0 10px transparent;
+            /* margin: 0 auto; */
+        }
+
+        .hdv-form-item {
+            margin-bottom: 20px;
+        }
+
+        .hdv-form-label {
+            display: block;
+            margin: 5px 0;
+        }
+
+        .hdv-form-description {
+            padding: 5px;
+            color: #73738c;
+            display: block;
+            line-height: 1.66;
+            margin: 5px 0;
+        }
+        
+        .hdv-setting-main {
+            margin-bottom: 20px;
+        }
+        .hdv-setting-main label {
+            display: block;
+	        margin: 5px 0;
+        }
+        
+        .hdv-setting-main input[type="checkbox"] {
+            margin-right: 10px;
+        }
+
+        .hdv-setting-main select {
+            width: 100%;
+            padding: 5px;
+            margin: 5px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Pipeline docsconverter-v2-build-pipeline</h1>
+    <p>매개변수가 필요한 빌드입니다.</p>
+    <div class='hdv-main-panel'>
+        <div class='hdv-form-item'>
+            <div class='hdv-form-label'>BuildOS</div>
+            <div class='hdv-setting-main'>
+                <label><input id='BuildOS.centos' , type='checkbox'> CentOS</label>
+                <label><input type='checkbox'> rhel8.6</label>
+                <label><input type='checkbox'> rhel9.2</label>
+                <label><input type='checkbox'> Ubuntu</label>
+                <label><input type='checkbox'> Windows</label>
+                <label><input type='checkbox'> Rocky</label>
+            </div>
+        </div>
+    </div>
+    <script>
+        document.getElementById('BuildOS.centos').addEventListener('change', function () {
+            var newDiv = document.getElementById('newDiv');
+            if (this.checked) {
+                var newDiv = document.createElement('div');
+                newDiv.id = 'newDiv';
+                newDiv.className = 'hdv-sub-panel';
+                newDiv.innerHTML = `
+                    <div class="hdv-form-item">
+                        <div class='hdv-form-label'>BuildRepository</div>
+                        <div class="hdv-form-description">
+                            develop - (오피스엔진 : hotfix/2021-v2-hdv),<br>
+                            release/m19 - (오피스엔진 : release/2024-v9-hdv(centos7제외)),<br>
+                            hotfix/8101 - (오피스엔진 : hotfix/2021-v2-hdv),<br>
+                            hotfix/8102 - (오피스엔진 : hotfix/2024-hdv)
+                        </div>
+                        <div class='hdv-setting-main'>
+                            <label><input type="checkbox"> develop</label>
+                            <label><input type="checkbox"> release/m19</label>
+                            <label><input type="checkbox"> tags/8100</label>
+                            <label><input type="checkbox"> hotfix/8101</label>
+                            <label><input type="checkbox"> hotfix/8200</label>
+                        </div>
+                    </div>
+                    <div class="hdv-form-item">
+                        <div class='hdv-form-label'>BuildIndex</div>
+                        <div class="hdv-form-description">
+                            FilterServer - c++ 필터 빌드,<br>
+                            DocumentViewer - 미들웨어 통합빌드,<br>
+                            Docker - 도커이미지 빌드,<br>
+                            InternalDeploy - 내부망 테스트서버 배포,<br>
+                            ExternalDeploy - 외부망 테스트서버 배포(RedHat서버, Rocky서버),<br>
+                            ExternalDockerDeploy - 외부망 테스트서버 도커이미지 배포(162서버)
+                        </div>
+                        <div class='hdv-setting-main'>
+                            <label><input type="checkbox"> FilterServer</label>
+                            <label><input type="checkbox"> DocumentViewer</label>
+                            <label><input type="checkbox"> Docker</label>
+                            <label><input type="checkbox"> InternalDeploy</label>
+                            <label><input type="checkbox"> ExternalDeploy</label>
+                            <label><input type="checkbox"> ExternalDockerDeploy</label>
+                        </div>
+                    </div>
+                    <div class="hdv-form-item">
+                        <div class='hdv-form-label'>BuildOptions</div>
+                        <div class="hdv-form-description">
+                            Publish - 릴리즈배포시 선택. 라이센스파일 제거, 
+                            \\fs-hc.hancom.com\product-cloud\DocumentViewer\product 폴더에 빌드날짜로 배포.<br>
+                            CLI - CLI배포시 선택<br>
+                            ForceFilterBuild - 필터빌드시 git head가 같은 빌드가 존재하여도 강제로 재빌드
+                        </div>
+                        <div class='hdv-setting-main'>
+                            <label><input type="checkbox"> Clean</label>
+                            <label><input type="checkbox"> BuildHword</label>
+                            <label><input type="checkbox"> BuildHcell</label>
+                            <label><input type="checkbox"> BuildHshow</label>
+                            <label><input type="checkbox"> BuildHwp</label>
+                            <label><input type="checkbox"> BuildCommon</label>
+                            <label><input type="checkbox"> Publish</label>
+                            <label><input type="checkbox"> CLI</label>
+                            <label><input type="checkbox"> ForceFilterBuild</label>
+                        </div>
+                    </div>
+                    <div class="hdv-form-item">
+                        <div class='hdv-form-label'>DOCKER_BUILD_INDEX</div>
+                        <div class="hdv-form-description">
+                            * ALL : 필터서버 + 미들웨어 도커이미지 생성<br>
+                            * MIDDLEWARE : 미들웨어 도커이미지만 생성<br>
+                            * FILTERSERVER : 필터서버 도커이미지만 생성<br>
+                            * DEVELOPER_DEMO : 개발자센터 데모 페이지 도커이미지만 생성
+                        </div>
+                        <div class='hdv-setting-main'>
+                            <label><input type="checkbox"> ALL</label>
+                            <label><input type="checkbox"> MIDDLEWARE</label>
+                            <label><input type="checkbox"> FILTERSERVER</label>
+                            <label><input type="checkbox"> DEVELOPER_DEMO</label>
+                        </div>
+                    </div>
+                    <div class="hdv-form-item">
+                        <div class='hdv-form-label'>DEPLOY_DOCKER_REPOSITORY</div>
+                        <div class="hdv-form-description">
+                            빌드된 이미지 개발자센터 도커이미지 push시 체크 - 
+                            ** dev 반영, tag 명에 latest 추가 **
+                        </div>
+                        <div class='hdv-setting-main'>
+                            <select>
+                                <option value="ON">ON</option>
+                                <option value="OFF">OFF</option>     
+                            </select>
+                        </div>
+                    </div>
+                    <div class="hdv-form-item">
+                        <div class='hdv-form-label'>DEPLOY_DOCKER_REPOSITORY_PRD</div>
+                        <div class="hdv-form-description">
+                            빌드된 이미지 개발자센터 도커이미지 push시 체크 - 
+                            ** stage, product 반영, tag 명에 버전번호 추가  **
+                        </div>
+                        <div class='hdv-setting-main'>
+                            <select>
+                                <option value="ON">ON</option>
+                                <option value="OFF">OFF</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="hdv-form-item">
+                        <div class='hdv-form-label'>DEPLOY_DOCKER_DOCS_REPOSITORY</div>
+                        <div class="hdv-form-description">
+                            빌드된 이미지 한컴독스 도커이미지 push시 체크
+                        </div>
+                        <div class='hdv-setting-main'>
+                            <select>
+                                <option value="ON">ON</option>
+                                <option value="OFF">OFF</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="hdv-form-item">
+                        <div class='hdv-form-label'>Tester</div>
+                        <div class='hdv-setting-main'>
+                            <label><input type="checkbox"> centos7/develop</label>
+                            <label><input type="checkbox"> centos7/main/tag</label>
+                            <label><input type="checkbox"> rhel8.6/release/hotfix</label>
+                            <label><input type="checkbox"> centos7/release/hotfix</label>
+                            <label><input type="checkbox"> rocky8.8/develop</label>
+                        </div>
+                    </div>
+                `;
+                this.parentNode.insertAdjacentElement('afterend', newDiv);
+                {
+                    var subPanels = document.querySelectorAll('.hdv-sub-panel');
+                    var selects = document.querySelectorAll('.hdv-form-item select');
+                    subPanels.forEach((subPanel, index) => {
+                        var subPanelWidth = subPanel.offsetWidth;
+                        selects.forEach((select, index) => {
+                            select.style.width = (subPanelWidth - 20) + 'px';
+                        });
+                    });
+                }
+            } else {
+                if (newDiv) {
+                    newDiv.remove();
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>

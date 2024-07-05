@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Pipeline Docsconverter V2 Build Pipeline</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            width: 100%;
+            margin: 0 auto;
+        }
+        h1 {
+            text-align: left;
+        }
+        .section {
+            margin-bottom: 20px;
+        }
+        .section label {
+            display: block;
+            margin: 5px 0;
+        }
+        .section input[type="checkbox"] {
+            margin-right: 10px;
+        }
+        .section select, .section input[type="text"] {
+            width: 100%;
+            padding: 5px;
+            margin: 5px 0;
+        }
+        .section .description {
+            padding: 5px;
+            color: #73738c;
+            display: block;
+            line-height: 1.66;
+            margin: 5px 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>Pipeline docsconverter-v2-build-pipeline</h1>
+    <p>매개변수가 필요한 빌드입니다.</p>
+    <div class="container">
+        <div class="section">
+            <h2>BuildOS</h2>
+            <label><input type="checkbox"> CentOS</label>
+            <label><input type="checkbox"> rhel8.6</label>
+            <label><input type="checkbox"> rhel9.2</label>
+            <label><input type="checkbox"> Ubuntu</label>
+            <label><input type="checkbox"> Windows</label>
+            <label><input type="checkbox"> Rocky</label>
+        </div>
+        <div class="section">
+            <h2>BuildRepository</h2>
+            <div class="description">
+                develop - (오피스엔진 : hotfix/2021-v2-hdv),
+                release/m19 - (오피스엔진 : release/2024-v9-hdv(centos7제외)),
+                hotfix/8101 - (오피스엔진 : hotfix/2021-v2-hdv),
+                hotfix/8102 - (오피스엔진 : hotfix/2024-hdv)
+            </div>
+            <label><input type="checkbox"> develop</label>
+            <label><input type="checkbox"> release/m19</label>
+            <label><input type="checkbox"> tags/8100</label>
+            <label><input type="checkbox"> hotfix/8101</label>
+            <label><input type="checkbox"> hotfix/8200</label>
+        </div>
+        <div class="section">
+            <h2>BuildIndex</h2>
+            <label><input type="checkbox"> FilterServer</label>
+            <label><input type="checkbox"> DocumentViewer</label>
+            <label><input type="checkbox"> Docker</label>
+            <label><input type="checkbox"> InternalDeploy</label>
+            <label><input type="checkbox"> ExternalDeploy</label>
+            <label><input type="checkbox"> ExternalDockerDeploy</label>
+        </div>
+        <div class="section">
+            <h2>BuildOptions</h2>
+            <label><input type="checkbox"> Clean</label>
+            <label><input type="checkbox"> BuildHword</label>
+            <label><input type="checkbox"> BuildHcell</label>
+            <label><input type="checkbox"> BuildHshow</label>
+            <label><input type="checkbox"> BuildHwp</label>
+            <label><input type="checkbox"> BuildCommon</label>
+            <label><input type="checkbox"> Publish</label>
+            <label><input type="checkbox"> CLI</label>
+            <label><input type="checkbox"> ForceFilterBuild</label>
+        </div>
+        <div class="section">
+            <h2>DOCKER_BUILD_INDEX</h2>
+            <label><input type="checkbox"> ALL</label>
+            <label><input type="checkbox"> MIDDLEWARE</label>
+            <label><input type="checkbox"> FILTERSERVER</label>
+            <label><input type="checkbox"> DEVELOPER_DEMO</label>
+        </div>
+        <div class="section">
+            <h2>DEPLOY_DOCKER_REPOSITORY</h2>
+            <select>
+                <option value="ON">ON</option>
+                <option value="OFF">OFF</option>     
+            </select>
+        </div>
+        <div class="section">
+            <h2>DEPLOY_DOCKER_REPOSITORY_PRD</h2>
+            <select>
+                <option value="ON">ON</option>
+                <option value="OFF">OFF</option>
+            </select>
+        </div>
+        <div class="section">
+            <h2>DEPLOY_DOCKER_DOCS_REPOSITORY</h2>
+            <select>
+                <option value="ON">ON</option>
+                <option value="OFF">OFF</option>
+            </select>
+        </div>
+        <div class="section">
+            <h2>Tester</h2>
+            <label><input type="checkbox"> centos7/develop</label>
+            <label><input type="checkbox"> centos7/main/tag</label>
+            <label><input type="checkbox"> rhel8.6/release/hotfix</label>
+            <label><input type="checkbox"> centos7/release/hotfix</label>
+            <label><input type="checkbox"> rocky8.8/develop</label>
+        </div>
+    </div>
+</body>
+</html>
